@@ -1,0 +1,155 @@
+```{bash}
+ssh -i Aniket_aws.pem ubuntu@ec2-3-238-87-100.compute-1.amazonaws.com
+```
+
+Nolan is sending the tar.zip file without the kraken database. Download it, add the database and run pima
+Could not download docker from conda nor do I have sudo access.
+
+Spun a new instance on AWS - docker_pima
+
+```{bash}
+ssh -i vasanta_ubuntu.pem ubuntu@ec2-54-209-121-93.compute-1.amazonaws.com
+
+# from abilbeast do
+scp -i Vasanta_ubuntu.pem pima_docker/pima_v2_nodb.tar ubuntu@ec2-54-209-121-93.compute-1.amazonaws.com:~/docker/
+
+ #This should load the file onto AWS
+
+#on AES -
+sudo docker load --input docker/pima_v2_nodb.tar
+
+
+
+sudo docker run -it --mount type=bind,source=/home/ubuntu/docker/pima_samples,target=/pima_samples test
+```
+
+Using the oither ec2
+```{bash}
+ssh -i Aniket_aws.pem ubuntu@ec2-54-164-67-82.compute-1.amazonaws.com
+
+sudo apt-get update
+
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" test | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+sudo docker load --input docker/pima_v4_nodb.tar
+sudo docker run -it test
+
+# Move the raw fast5 samples to AWS, folder - pima_samples, then run the following command inside the docker
+sudo docker run -it --mount type=bind,source=/home/ubuntu/docker/pima_samples,target=/pima_samples test
+cd DockerDir
+
+python pima/pima.py --out ../pima_samples/outdir/ --ont-fast5 ../pima_samples/ --threads 20 --overwrite --genome-size 5.4m --verb 3
+
+
+```
+
+Had issues with the GPU/Cuda for guppy. So Nolan edited the docker to include the CUDA issues
+
+With v5
+
+```{bash}
+
+ssh -i Aniket_aws.pem ubuntu@ec2-3-87-226-249.compute-1.amazonaws.com
+## Loading the pima docker tar file to AWS
+scp -i Aniket_aws.pem pima_docker/pima_v5_nodb.tar ubuntu@ec2-3-87-226-249.compute-1.amazonaws.com:~/docker/
+```
+
+Loading docker with Nvidia and Cuda requirements
+
+```{bash}
+sudo add-apt-repository ppa:graphics-drivers/ppa -y
+sudo apt-get update
+sudo apt-get install -y nvidia-driver-460 nvidia-settings nvidia-modprobe
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" test | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+#Nvidia - ENABLING THE DOCKER REPOSITORY AND INSTALLING THE NVIDIA CONTAINER TOOLKIT
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+$ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+$ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+
+#To check if it loaded fine
+sudo docker run --gpus all nvidia/cuda:11.0-base nvidia-smi
+
+```
+
+Then get outside the docker and run the following command to mount
+```{bash}
+sudo docker run --gpus all -it --mount type=bind,source=/home/ubuntu/docker/pima_samples,target=/pima_samples test
+cd DockerDir
+python pima/pima.py --out ../pima_samples/outdir/ --ont-fast5 ../pima_samples/ --threads 20 --overwrite --genome-size 5.4m --verb 3
+
+```
+Guppy giving error
+
+[guppy/error] *common::LoadModuleFromFatbin: Loading fatbin file shared.fatbin failed with: CUDA error at /builds/ofan/ont_core_cpp/ont_core/common/cuda_common.cpp:81: CUDA_ERROR_NO_BINARY_FOR_GPU
+Segmentation fault (core dumped)
+
+nvidia-smi - will tell you if the nvidia is working fine
+
+We see that Tesla M60 is available and that is from 2016. Guppy needs compute capability of 6.1 which is the Tesla P4 GPU. When checked on aws that is p3, its a bit more expensive but we spun a new instance using p3.2xlarge with 50GiB
+
+Spun a new instance Pima_p3
+and ran all the commands until pima.py. While running guppy -
+Error saying no space. So had to increase the volume on ec2 instance to 100GiB
+
+```{bash}
+ssh -i Aniket_aws.pem ubuntu@ec2-18-205-109-188.compute-1.amazonaws.com
+mkdir docker
+scp -i Aniket_aws.pem pima_docker/pima_v5_nodb.tar.gz ubuntu@ssh -i Aniket_aws.pem ubuntu@ec2-18-205-109-188.compute-1.amazonaws.com:~/docker/ #from local
+
+
+sudo add-apt-repository ppa:graphics-drivers/ppa -y
+sudo apt-get update
+sudo apt-get install -y nvidia-driver-460 nvidia-settings nvidia-modprobe
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" test | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+#Nvidia - ENABLING THE DOCKER REPOSITORY AND INSTALLING THE NVIDIA CONTAINER TOOLKIT
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+
+#To check if it loaded fine
+sudo docker run --gpus all nvidia/cuda:11.0-base nvidia-smi
+
+#Upload the fast5 files from local drive
+scp -i Aniket_aws.pem /storage/projects/pima/fast5/*.fast5 ubuntu@ec2-3-236-46-32.compute-1.amazonaws.com:~/docker/
+
+# on AWS, run the following commands
+sudo docker load --input docker/pima_v5_nodb.tar
+sudo docker run --gpus all -it --mount type=bind,source=/home/ubuntu/docker_pima/pima_samples,target=/pima_samples test
+cd DockerDir
+python pima/pima.py --out ../pima_samples/outdir/ --ont-fast5 ../pima_samples/ --threads 20 --overwrite --genome-size 5.4m --verb 3
+```
