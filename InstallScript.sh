@@ -26,7 +26,7 @@ sudo usermod -aG docker $USER
 
 sudo service docker restart
 
-docker load --input pima.tar
+docker pull kyxsune/pima-docker:latest
 
 printf 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory pima"' >> ~/.bashrc
 source ~/.bashrc
