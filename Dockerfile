@@ -55,7 +55,7 @@ ENV PATH /DockerDir/:$PATH
 SHELL ["/bin/bash", "-c"]
 
 #Set Pimascript as the entrypoint
-ENTRYPOINT ["python", "pima/pima.py"]
+ENTRYPOINT ["/root/miniconda3/bin/python", "/DockerDir/pimapima/pima.py"]
 #Set the Default parameters for testing
 #CMD ["--reference-genome","testSets/AmesAndPlasmids.fasta","--ont-fastq","testSets/bAnthracis.fastq","--output","Workdir","--mutation","testSets/AmesRegions.bed","--verb","3","--genome-size","5m","--overwrite"]
 CMD ["--help"]
