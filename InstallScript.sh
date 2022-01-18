@@ -37,7 +37,7 @@ sudo service docker restart
 docker pull kyxsune/pima-docker:latest
 
 # Add shortcut aliasing
-printf 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory kyxsune/pima-docker:latest"' >> ~/.bashrc
+echo 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory kyxsune/pima-docker:latest"' >> ~/.bashrc
 source ~/.bashrc
 
 # File handling Steps
