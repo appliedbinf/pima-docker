@@ -16,7 +16,13 @@ Though the docker will include all the code needed to execute the parallelizatio
 
 # Installation
 
-Simply run the following.
+Download the installation scripts to this computer
+
+```commandline
+wget https://raw.githubusercontent.com/appliedbinf/pima-docker/main/InstallScript.sh
+```
+
+Then simply run the following.
 
 ```commandline
 sudo bash InstallScript.sh
