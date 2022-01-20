@@ -48,9 +48,11 @@ ENV PATH /home/DockerDir/guppy/bin:$PATH
 ENV PATH /home/DockerDir/pima:$PATH
 ENV PATH /home/DockerDir/:$PATH
 
-#RUN sh ./DockerDir/KrakenInit.sh
+RUN sh /home/DockerDir/KrakenInit.sh
 
-#ENV KRAKEN2_DB_PATH="/DockerDir/Database"
+#RUN mv /home/DockerDir/Database/Standard/ /home/DockerDir/pima/data/kraken2
+
+ENV KRAKEN2_DB_PATH="/home/DockerDir/pima/data/kraken2"
 
 SHELL ["/bin/bash", "-c"]
 
