@@ -34,10 +34,10 @@ sudo newgrp docker
 sudo service docker restart
 
 # Download docker image from Dockerhub
-docker pull kyxsune/pima-docker:latest
+docker pull appliedbioinformaticslab/pima-docker:kraken
 
 # Add shortcut aliasing
-printf 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory kyxsune/pima-docker:latest"' >> ~/.bashrc
+echo 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory appliedbioinformaticslab/pima-docker:kraken"' >> ~/.bashrc
 source ~/.bashrc
 
 # File handling Steps
