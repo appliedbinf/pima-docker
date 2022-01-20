@@ -34,7 +34,7 @@ sudo newgrp docker
 sudo service docker restart
 
 # Download docker image from Dockerhub
-docker pull appliedbioinformaticslab/pima-docker:kraken
+sudo docker pull appliedbioinformaticslab/pima-docker:kraken
 
 # Add shortcut aliasing
 echo 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory appliedbioinformaticslab/pima-docker:kraken"' >> ~/.bashrc
