@@ -8,12 +8,6 @@ Pima relies on GPU acceleration and parallezation for parts of its pipeline. The
 
 The Docker Environment and associated files require at least 100gb to build correctly and execute. It is recommended that more than 200gb be available to the host machine for.
 
-## Nvidia-Driver Installation
-
-**Note: The Nvidia Driver installation process changes every few years, this guide may be out of date.** 
-
-Though the docker will include all the code needed to execute the parallelization through the graphics card, the drivers must be installed on the host machine for the docker to communicate to the GPU. The documentation is summarized here, but can be viewed in full [here](https://docs.nvidia.com/ai-enterprise/deployment-guide/dg-docker.html)
-
 # Installation
 
 Download the installation scripts to this computer
