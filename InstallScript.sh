@@ -42,6 +42,3 @@ source ~/.bashrc
 
 # File handling Steps
 mkdir Workdir
-
-# Pull the docker image
-sudo docker pull kyxsune/pima-docker:kraken
