@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -x
 CORE_PATH="/home/DockerDir/mountpoint";
 
 while getopts "m:r:f:q:" flag
