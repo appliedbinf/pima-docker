@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-while getopts m:r:5:q: flag
+while getopts "m:r:f:q:" flag
 
 CORE_PATH="/home/DockerDir/mountpoint";
 
 do
     case "${flag}" in
-        5) Fast5=${OPTARG};;
+        f) Fast5=${OPTARG};;
         q) Fastq=${OPTARG};;
         r) reference=${OPTARG};;
         m) mutation=${OPTARG};;
