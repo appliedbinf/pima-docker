@@ -10,9 +10,9 @@ do
         q) Fastq=${OPTARG};;
         r) reference=${OPTARG};;
         m) mutation=${OPTARG};;
-        *)
-                        echo 'Error in command line parsing' >&2
-                        exit 1
+        \?)
+          echo 'Invalid Option' >&2
+          exit 1
     esac
 done
 
