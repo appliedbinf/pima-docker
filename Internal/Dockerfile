@@ -34,7 +34,7 @@ RUN git clone https://github.com/appliedbinf/pima.git
 
 RUN mv pima /home/DockerDir/pima
 
-ADD ./* /home/DockerDir
+ADD ./ /home/DockerDir
 
 RUN conda env update -n base --file /home/DockerDir/environment.yml
 
