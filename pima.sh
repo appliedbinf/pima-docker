@@ -2,6 +2,7 @@
 
 CORE_PATH="/home/DockerDir/mountpoint";
 
+
 while getopts "m:r:f:q:o:" flag
 
 do
@@ -17,7 +18,9 @@ do
     esac
 done
 
-if [ ! -e "$reference" ] || [ ! -e "$mutation" ]|| [ ! -e "$outdir" ]; then
+mkdir $outdir
+
+if [ ! -e "$reference" ] || [ ! -e "$mutation" ] || [ ! -e "$outdir" ]; then
         echo 'reference nor mutation nor outdir defined ' >&2
         exit 1
 fi
