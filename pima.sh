@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-while getopts "m:r:f:q:" flag
-
 CORE_PATH="/home/DockerDir/mountpoint";
+
+while getopts "m:r:f:q:" flag
 
 do
     case "${flag}" in
