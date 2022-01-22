@@ -10,9 +10,9 @@ do
         q) Fastq=${OPTARG};;
         r) reference=${OPTARG};;
         m) mutation=${OPTARG};;
-        \?)
-          echo 'Invalid Option' >&2
-          exit 1
+        \?) printf "illegal option: -%s\n" "$OPTARG" >&2
+            exit 1
+            ;;
     esac
 done
 
