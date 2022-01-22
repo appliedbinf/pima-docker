@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
 CORE_PATH="/home/DockerDir/mountpoint";
 
 while getopts "m:r:f:q:" flag
@@ -17,22 +16,23 @@ do
     esac
 done
 
-if [ -z "$reference" ] || [ -z "$mutation" ]; then
+if [ ! -e "$reference" ] || [ ! -e "$mutation" ]; then
         echo 'reference nor mutation defined ' >&2
         exit 1
 fi
 
-if [ -z "$Fastq" ] || [ -z "$Fast5" ]; then
+if [ ! -e "$Fastq" ] && [ ! -e "$Fast5" ]; then
         echo 'Neither Fastq nor Fast5 file paths defined ' >&2
         exit 1
 fi
 
-if [ -n "$Fastq" ] && [ -n "$Fast5" ]; then
+if [ -e "$Fastq" ] && [ -e "$Fast5" ]; then
         echo 'Both Fastq and Fast5 defined, please select only one ' >&2
         exit 1
 fi
+echo "All arguments received"
 
-if [ -n "$Fastq" ] && [ -z "$Fast5" ]; then
+if [ -e "$Fastq" ] && [ ! -e "$Fast5" ]; then
         echo 'Executing Fastq path for pima' >&2
         echo "FASTq: $Fastq";
         echo "reference: $reference";
@@ -42,7 +42,7 @@ if [ -n "$Fastq" ] && [ -z "$Fast5" ]; then
         exit 0
 fi
 
-if [ -n "$Fastq" ] && [ -z "$Fast5" ]; then
+if [ ! -e "$Fastq" ] && [ -e "$Fast5" ]; then
         echo 'Executing Fast5 path for pima' >&2
         echo "FAST5: $Fast5";
         echo "reference: $reference";
