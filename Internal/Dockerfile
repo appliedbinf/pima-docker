@@ -40,6 +40,8 @@ RUN conda env update -n base --file /home/DockerDir/environment.yml
 
 RUN sed -i 's/cgi/html/g' /home/miniconda/lib/python3.8/site-packages/quast_libs/site_packages/jsontemplate/jsontemplate.py
 
+RUN medaka tools download_models
+
 WORKDIR /home/DockerDir/
 
 RUN tar -xvf ont-guppy_6.0.1_linux64.tar.gz && mv ont-guppy /home/DockerDir/guppy && rm ont-guppy_6.0.1_linux64.tar.gz
