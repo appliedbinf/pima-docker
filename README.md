@@ -36,7 +36,7 @@ You should see the --help output for Pima.
 For ease of use, use the pima.sh script included in this repository.
 
 ```commandline
-sudo bash pima.sh -r <relative path to reference file> -m <relative path to mutations file> -f <relative path to fast5 files directory>
+sudo bash pima.sh -r <relative path to reference file> -m <relative path to mutations file> -f <relative path to fast5 files directory> -o <relative path to output directory>
 ```
 The flags for -r, -m, -f all have to be set and should be within the current working directory by a reachable relative path. 
 
