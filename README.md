@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-In order to install this software you must have Administrator Permissions. These permissions are required in order to install the needed GPU Drivers and the Docker Daemon. If the software is already installed skip to the operations section.
+In order to install this software you must have Administrator Permissions. These permissions are required to install the needed GPU Drivers and the Docker Daemon. If the software is already installed skip to the operations section.
 
 Pima relies on GPU acceleration and parallezation for parts of its pipeline. Therefore a graphics card with a CUDA Compute Capability of >=6.0. [Handy Reference linking GPUs to Compatibility](https://developer.nvidia.com/cuda-gpus#compute)
 
