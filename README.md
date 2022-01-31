@@ -38,6 +38,6 @@ For ease of use, use the pima.sh script included in this repository.
 ```commandline
 sudo bash pima.sh -r <relative path to reference file> -m <relative path to mutations file> -f <relative path to fast5 files directory> -o <relative path to output directory>
 ```
-The flags for -r, -m, -f all have to be set and should be within the current working directory by a reachable relative path. 
+The flags for -r, -m, -f, -o all have to be set and should be within the current working directory by a reachable relative path. 
 
-Running this script will execut pima and output the results to a directory named **out** within the current working directory.
+If an output directory is not provided then running this script will execut pima and output the results to a directory named **out** within the current working directory.
