@@ -1,4 +1,4 @@
-# Installation and Preparation of Pima Docker
+# Installation and preparation of pima docker
 
 ## Prerequisites
 
