@@ -10,7 +10,7 @@ The Docker Environment and associated files require at least 100gb to build corr
 
 # Installation
 
-Download the installation scripts to this computer
+Download the installation scripts to your system
 
 ```commandline
 wget https://raw.githubusercontent.com/appliedbinf/pima-docker/main/InstallScript.sh
