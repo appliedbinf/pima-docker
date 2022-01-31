@@ -40,4 +40,4 @@ sudo bash pima.sh -r <relative path to reference file> -m <relative path to muta
 ```
 The flags for -r, -m, -f, -o all have to be set and should be within the current working directory by a reachable relative path. 
 
-If an output directory is not provided then running this script will execut pima and output the results to a directory named **out** within the current working directory.
+If an output directory is not provided then running this script will execute pima and output the results to a directory named **out** within the current working directory.
