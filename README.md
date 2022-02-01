@@ -1,8 +1,8 @@
-# Installation and Preparation of Pima Docker
+# Installation and preparation of pima docker
 
 ## Prerequisites
 
-In order to install this software you must have Administrator Permissions. These permissions are required in order to install the needed GPU Drivers and the Docker Daemon. If the software is already installed skip to the operations section.
+In order to install this software you must have Administrator Permissions. These permissions are required to install the needed GPU Drivers and the Docker Daemon. If the software is already installed skip to the operations section.
 
 Pima relies on GPU acceleration and parallezation for parts of its pipeline. Therefore a graphics card with a CUDA Compute Capability of >=6.0. [Handy Reference linking GPUs to Compatibility](https://developer.nvidia.com/cuda-gpus#compute)
 
@@ -10,7 +10,7 @@ The Docker Environment and associated files require at least 100gb to build corr
 
 # Installation
 
-Download the installation scripts to this computer
+Download the installation scripts to your system
 
 ```commandline
 wget https://raw.githubusercontent.com/appliedbinf/pima-docker/main/InstallScript.sh
@@ -36,8 +36,9 @@ You should see the --help output for Pima.
 For ease of use, use the pima.sh script included in this repository.
 
 ```commandline
-sudo bash pima.sh -r <relative path to reference file> -m <relative path to mutations file> -f <relative path to fast5 files directory>
+wget https://raw.githubusercontent.com/appliedbinf/pima-docker/main/pima.sh
+sudo bash pima.sh -r <relative path to reference file> -m <relative path to mutations file> -f <relative path to fast5 files directory> -o <relative path to output directory>
 ```
-The flags for -r, -m, -f all have to be set and should be within the current working directory by a reachable relative path. 
+The flags for -r, -m, -f, -o all have to be set and should be within the current working directory by a reachable relative path. 
 
-Running this script will execut pima and output the results to a directory named **out** within the current working directory.
+If an output directory is not provided then running this script will execute pima and output the results to a directory named **out** within the current working directory.
