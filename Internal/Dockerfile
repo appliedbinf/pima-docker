@@ -49,10 +49,7 @@ RUN tar -xvf ont-guppy_6.0.1_linux64.tar.gz && mv ont-guppy /home/DockerDir/gupp
 ENV PATH /home/DockerDir/guppy/bin:$PATH
 ENV PATH /home/DockerDir/pima:$PATH
 ENV PATH /home/DockerDir/:$PATH
-
-#RUN sh ./DockerDir/KrakenInit.sh
-
-#ENV KRAKEN2_DB_PATH="/DockerDir/Database"
+ENV REFERENCE="/home/DockerDir/Reference"
 
 SHELL ["/bin/bash", "-c"]
 
