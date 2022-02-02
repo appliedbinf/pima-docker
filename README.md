@@ -2,11 +2,11 @@
 
 ## Prerequisites
 
-In order to install this software you must have Administrator Permissions. These permissions are required to install the needed GPU Drivers and the Docker Daemon. If the software is already installed skip to the operations section.
+In order to install this software you must have administrator permissions. These permissions are required to install the needed GPU drivers and the Docker daemon. If the software is already installed skip to the operations section.
 
-Pima relies on GPU acceleration and parallezation for parts of its pipeline. Therefore a graphics card with a CUDA Compute Capability of >=6.0. [Handy Reference linking GPUs to Compatibility](https://developer.nvidia.com/cuda-gpus#compute)
+PiMA relies on GPU acceleration and parallezation for parts of its pipeline. Therefore a graphics card with a CUDA Compute Capability of >=6.0. [Handy Reference linking GPUs to Compatibility](https://developer.nvidia.com/cuda-gpus#compute)
 
-The Docker Environment and associated files require at least 100gb to build correctly and execute. It is recommended that more than 200gb be available to the host machine for.
+The Docker environment and associated files require at least 100gb to build correctly and execute. It is recommended that more than 200gb be available to the host machine for.
 
 # Installation
 
@@ -32,7 +32,7 @@ sudo run -it appliedbioinformaticslab/pima-docker:kraken
 
 You should see the --help output for Pima.
 
-# Using the Pima Docker
+# Using the PiMA Docker
 For ease of use, use the pima.sh script included in this repository.
 
 ```commandline
