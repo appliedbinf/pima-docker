@@ -30,7 +30,7 @@ In order to test if the installation was successful, run the following from the 
 sudo run -it appliedbioinformaticslab/pima-docker:kraken
 ```
 
-You should see the --help output for Pima.
+You should see the --help output for PiMA.
 
 # Using the PiMA Docker
 For ease of use, use the pima.sh script included in this repository.
