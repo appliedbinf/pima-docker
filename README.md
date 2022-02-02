@@ -32,7 +32,7 @@ sudo run -it appliedbioinformaticslab/pima-docker:kraken
 
 You should see the --help output for PiMA.
 
-# Using the PiMA Docker
+# Using the PiMA docker
 For ease of use, use the pima.sh script included in this repository.
 
 ```commandline
