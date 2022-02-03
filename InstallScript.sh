@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+while getopts "k" flag
+
+do
+    case "${flag}" in
+        k) kraken="true";;
+        *) printf "illegal option: -%s\n" "$OPTARG" >&2
+            exit 1
+            ;;
+    esac
+done
+
 # Install all the Docker Environment
 sudo apt-get update
 
@@ -36,7 +47,13 @@ sudo newgrp docker
 sudo service docker restart
 
 # Download docker image from Dockerhub
-sudo docker pull appliedbioinformaticslab/pima-docker:kraken
+if [ $kraken ]
+then
+        sudo docker pull appliedbioinformaticslab/pima-docker:kraken
+else
+        sudo docker pull appliedbioinformaticslab/pima-docker:latest
+fi
+
 
 # Add shortcut aliasing
 echo 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory appliedbioinformaticslab/pima-docker:kraken"' >> ~/.bashrc
