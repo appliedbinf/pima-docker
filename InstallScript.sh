@@ -11,6 +11,8 @@ do
     esac
 done
 
+echo $kraken
+
 # Install all the Docker Environment
 sudo apt-get update
 
@@ -41,7 +43,7 @@ sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 user=$SUDO_USER
 echo $user
 
-sudo groupadd docker
+sudo groupadd -f docker #Force the creation of the group
 sudo usermod -aG docker $user
 sudo newgrp docker
 sudo service docker restart
@@ -53,7 +55,6 @@ then
 else
         sudo docker pull appliedbioinformaticslab/pima-docker:latest
 fi
-
 
 # Add shortcut aliasing
 echo 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory appliedbioinformaticslab/pima-docker:kraken"' >> ~/.bashrc
