@@ -3,17 +3,28 @@ import shutil
 import pandas as pd
 
 # This is a utility set up function that converts a folder of fasta files into a folder of Ames files
+# Gene Symbol <- Name
+# Class <- type
+# Subclass <- drug
+# Sequence name <- note
 
 path = 'Internal/References'
 
 #contig	start	stop	name	type	drug	note
 
-Columns = ['Contig id','Start','Stop','Sequence name','Element type','Class','HMM description']
+Columns = ['Contig id','Start','Stop','Gene symbol','Class','Subclass','Sequence name']
+
+
+
+# FIRST COLUMN is just chromosome
+
 
 def reducefile(i):
     File = pd.read_csv(i,delimiter='\t')
     output = File[Columns]
-    output.to_csv(i.split('.')[0]+'_r.bed',sep='\t')
+    output.set_axis(['contig','start','stop','name','type','drug','note'],axis=1,inplace=True)
+    output['contig'] = 'chromosome'
+    output.to_csv(i.split('.')[0]+'_r.bed',sep='\t',index=False)
 
 def createmutdir(i):
     Name = i.split('.')[0]

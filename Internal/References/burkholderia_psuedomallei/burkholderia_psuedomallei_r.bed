@@ -1,4 +1,0 @@
-	Contig id	Start	Stop	Sequence name	Element type	Class	HMM description
-0	NZ_CP008782.1	1403758	1404642	PenI family class A extended-spectrum beta-lactamase	AMR	BETA-LACTAM	
-1	NZ_CP008782.1	2284536	2284853	tobramycin N-acetyltransferase AAC(6')-III	AMR	AMINOGLYCOSIDE	
-2	NZ_CP008782.1	3079433	3080239	OXA-42 family oxacillin-hydrolyzing class D beta-lactamase OXA-59	AMR	BETA-LACTAM	

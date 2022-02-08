@@ -51,7 +51,7 @@ ENV PATH /home/DockerDir/guppy/bin:$PATH
 ENV PATH /home/DockerDir/pima:$PATH
 ENV PATH /home/DockerDir/:$PATH
 ENV KRAKEN2_DB_PATH="/home/DockerDir/pima/data/kraken2"
-ENV REFERENCE="/home/DockerDir/Reference"
+ENV REFERENCE="/home/DockerDir/References"
 
 SHELL ["/bin/bash", "-c"]
 
