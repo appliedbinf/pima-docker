@@ -23,7 +23,7 @@ sudo apt-get install -y \
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-wget -O https://raw.githubusercontent.com/appliedbinf/pima-docker/main/Interfaces/pima.sh
+#wget -O https://raw.githubusercontent.com/appliedbinf/pima-docker/main/Interfaces/pima.sh
 wget -O https://raw.githubusercontent.com/appliedbinf/pima-docker/main/Interfaces/Preloaded.json
 wget -O https://raw.githubusercontent.com/appliedbinf/pima-docker/main/Interfaces/pima_interface.py
 

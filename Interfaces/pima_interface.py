@@ -61,8 +61,8 @@ parser.add_argument("-m","--mutation",type=str,action="store",
 parser.add_argument("-R","--Preloded_Reference",type=str,action="store",choices=Current_SupportedOrganisms,
                     help="Select one of the preloaded Reference and Mutation Options")
 # Add output file
-parser.add_argument("-o","--output",type=str,action="store",required=True,
-                    help="Path to output file")
+parser.add_argument("-o","--output",type=str,action="store",default='out',
+                    help="Path to output file. If none given will create a dir named 'out'")
 
 # Handle Arguments
 opts, _ = parser.parse_known_args()
