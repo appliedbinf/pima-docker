@@ -1,6 +1,7 @@
 import os
 import shutil
 import pandas as pd
+import json
 
 # This is a utility set up function that converts a folder of fasta files into a folder of Ames files
 # Gene Symbol <- Name
@@ -14,10 +15,7 @@ path = 'Internal/References'
 
 Columns = ['Contig id','Start','Stop','Gene symbol','Class','Subclass','Sequence name']
 
-
-
 # FIRST COLUMN is just chromosome
-
 
 def reducefile(i):
     File = pd.read_csv(i,delimiter='\t')
@@ -36,7 +34,13 @@ def createmutdir(i):
     shutil.copy(Oldpath,Newpath)
     os.system('amrfinder -n {0} --threads 8 -o {1}'.format(Newpath,Mutpath))
     reducefile(Mutpath)
+    return(Name)
+
+Names = []
 
 for i in os.listdir(path):
     if '.fasta' in i:
-        createmutdir(i)
+        Names.append(createmutdir(i))
+
+with open("Preloaded.json","w") as outfile:
+    json.dump(Names,outfile)

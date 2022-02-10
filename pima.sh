@@ -2,8 +2,13 @@
 
 CORE_PATH="/home/DockerDir/mountpoint/";
 
-
 while getopts "R:m:r:f:q:o:" flag
+
+#Add a Help flag for usage
+#Create a script for loading paths
+
+#Add references files from Vasanta to the docker
+#Convert this script to a python file
 
 do
     case "${flag}" in
@@ -64,6 +69,7 @@ if [ -n "$Fastq" ] && [ -n "$Fast5" ]; then
         echo 'Both Fastq and Fast5 defined, please select only one ' >&2
         exit 1
 fi
+
 echo "All arguments received"
 
 if [ -n "$Fastq" ] && [ ! -n "$Fast5" ]; then
