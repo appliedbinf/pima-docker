@@ -25,7 +25,9 @@ sudo apt-get install -y \
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-wget https://raw.githubusercontent.com/appliedbinf/pima-docker/main/pima.sh
+wget -O https://raw.githubusercontent.com/appliedbinf/pima-docker/main/Interfaces/pima.sh
+wget -O https://raw.githubusercontent.com/appliedbinf/pima-docker/main/Interfaces/Preloaded.json
+wget -O https://raw.githubusercontent.com/appliedbinf/pima-docker/main/Interfaces/pima_interface.py
 
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt-get update
