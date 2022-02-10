@@ -45,12 +45,10 @@ RUN medaka tools download_models
 WORKDIR /home/DockerDir/
 
 RUN tar -xvf ont-guppy_6.0.1_linux64.tar.gz && mv ont-guppy /home/DockerDir/guppy && rm ont-guppy_6.0.1_linux64.tar.gz
-RUN sh /home/DockerDir/KrakenInit.sh
 
 ENV PATH /home/DockerDir/guppy/bin:$PATH
 ENV PATH /home/DockerDir/pima:$PATH
 ENV PATH /home/DockerDir/:$PATH
-ENV KRAKEN2_DB_PATH="/home/DockerDir/pima/data/kraken2"
 ENV REFERENCE="/home/DockerDir/References"
 
 SHELL ["/bin/bash", "-c"]
@@ -60,3 +58,7 @@ ENTRYPOINT ["python", "/home/DockerDir/pima/pima.py"]
 #Set the Default parameters for testing
 #CMD ["--reference-genome","testSets/AmesAndPlasmids.fasta","--ont-fastq","testSets/bAnthracis.fastq","--output","Workdir","--mutation","testSets/AmesRegions.bed","--verb","3","--genome-size","5m","--overwrite"]
 CMD ["--help"]
+
+# Added to bottom to allow for better building between bare pima and kraken pima
+ENV KRAKEN2_DB_PATH="/home/DockerDir/pima/data/kraken2"
+RUN sh /home/DockerDir/KrakenInit.sh

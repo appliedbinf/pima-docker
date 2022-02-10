@@ -1,3 +1,13 @@
 Dockerfile
 Dockerfile_Kraken
 ReferenceRetrieval.sh
+ReferencePriming.py
+References/bacillus_anthracis.fasta
+References/bacillus_anthracis_STERNE.fasta
+References/burkholderia_psuedomallei.fasta
+References/francisella_tularensis.fasta
+References/francisella_tularensis_LVS.fasta
+References/klebsiella_pneumoniae.fasta
+References/yersinia_pestis.fasta
+References/yersinia_pestis_KIM5.fasta
+References/yersinia_pestis_KIM10+.fasta
