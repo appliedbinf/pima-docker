@@ -1,4 +1,28 @@
-# Installation and preparation of pima docker
+# Introduction to this git repo
+This repository has the following structure:
+
+ * Interfaces (holds the interfaces for interacting with the docker)
+ * Internal (holds the scripts and reference files used for docker image building)
+ * Installation Script (The installation script used to install and build the docker image)
+ 
+# Table of Contents
+
+- [Introduction to this git repo](#introduction-to-this-git-repo)
+- [PIMA: Plasmid, Integrations, Mutations, and Antibiotic docker implementation](#pima--plasmid--integrations--mutations--and-antibiotic-docker-implementation)
+  * [Prerequisites](#prerequisites)
+- [Installation](#installation)
+  * [Add Docker Group](#add-docker-group)
+- [Testing installation](#testing-installation)
+- [Using the docker](#using-the-docker)
+  * [Python Interface](#python-interface)
+    + [Quickstart](#quickstart)
+    + [All available Arguments](#all-available-arguments)
+  * [Direct Access](#direct-access)
+- [Examples](#examples)
+  * [Python Interface](#python-interface-1)
+  * [Direct access](#direct-access)
+
+#Installation and preparation of pima docker
 
 ## Prerequisites
 
@@ -16,23 +40,26 @@ Download the installation scripts to your system
 wget https://raw.githubusercontent.com/appliedbinf/pima-docker/main/InstallScript.sh
 ```
 
-Then simply run the following.
-
+To download the docker image with kraken databases loaded: (estimated size 70gb)
+```commandline
+sudo bash InstallScript.sh -k
+```
+To download the docker image without: (estimated size 8gb)
 ```commandline
 sudo bash InstallScript.sh
 ```
 
-This process will install the drivers, the docker packages, and pull down the latest **kraken** docker image. It may take a while and requires elevated permissions
+This process will install the drivers, the docker packages. It will take a while and requires elevated permissions
 
 ## Add Docker Group
 Though the installation script attempts to configure the docker group, you may need to run the following to interact the docker outside of root
 ```commandline
-    sudo groupadd docker
-    sudo usermod -aG docker $USER
+sudo groupadd docker
+sudo usermod -aG docker $USER
 ```
 Close your shell and reopen it so that changes may take effect and verify that you may execute docker commands
 ```commandline
-    docker run hello-world
+docker run hello-world
 ```
 The full documentation for this process is [here](https://docs.docker.com/engine/install/linux-postinstall/)
 
@@ -102,7 +129,7 @@ For finer control, one may pass parameters directly to the docker as though it w
 
 The standard format for executing a docker image is as follows:
 ```commandline
-   docker run -it --gpus all --mount type=bind,source=<DesiredDirectory>,target=/home/DockerDir/mountpoint/ appliedbioinformaticslab/pima-docker:kraken <any arguments to pima>
+docker run -it --gpus all --mount type=bind,source=<DesiredDirectory>,target=/home/DockerDir/mountpoint/ appliedbioinformaticslab/pima-docker:kraken <any arguments to pima>
 ```
 ** a full treatment of how to interact with docker containers via mounting is given [here](https://docs.docker.com/storage/bind-mounts/) **
 ** note the --gpus all flag denotes that the container may access GPUs on the host device and is required **
@@ -122,7 +149,7 @@ python pima_inteface --Preloded_Reference bacillus_anthracis --Fast5 barcodes_fo
 ## Direct access
 The direct access command essentially appends all the flags for [pima](https://github.com/appliedbinf/pima/blob/master/README.md#quickstart-guide) to the docker command:
 ```commandline
-    docker run -it --gpus all --mount type=bind,source=<DesiredDirectory>,target=/home/DockerDir/mountpoint/ appliedbioinformaticslab/pima-docker:kraken \
-    --out ont_output --ont-fast5 barcodes_folder --threads 16 --overwrite --genome-size 5m \
-    --verb 3 --reference-genome ref.fasta --mutation-regions mutation_regions.bed
+docker run -it --gpus all --mount type=bind,source=<DesiredDirectory>,target=/home/DockerDir/mountpoint/ appliedbioinformaticslab/pima-docker:kraken \
+--out ont_output --ont-fast5 barcodes_folder --threads 16 --overwrite --genome-size 5m \
+--verb 3 --reference-genome ref.fasta --mutation-regions mutation_regions.bed
 ```
