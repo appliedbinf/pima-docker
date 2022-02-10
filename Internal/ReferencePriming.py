@@ -9,7 +9,7 @@ import json
 # Subclass <- drug
 # Sequence name <- note
 
-path = 'Internal/References'
+path = 'References'
 
 #contig	start	stop	name	type	drug	note
 
