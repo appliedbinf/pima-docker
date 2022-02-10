@@ -11,8 +11,6 @@ do
     esac
 done
 
-echo $kraken
-
 # Install all the Docker Environment
 sudo apt-get update
 
@@ -58,9 +56,9 @@ else
         sudo docker pull appliedbioinformaticslab/pima-docker:latest
 fi
 
-# Add shortcut aliasing
-echo 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory appliedbioinformaticslab/pima-docker:kraken"' >> ~/.bashrc
-source ~/.bashrc
-
 # File handling Steps
 mkdir Workdir
+
+# Add shortcut aliasing
+#echo 'alias pima="docker run --gpus all -it --mount type=bind,source=$PWD/Workdir,target=/DockerDir/Workdirectory appliedbioinformaticslab/pima-docker:kraken"' >> ~/.bashrc
+#source ~/.bashrc
