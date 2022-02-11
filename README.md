@@ -1,4 +1,4 @@
-# Introduction to this git repo
+# Docker container for PIMA
 This repository has the following structure:
 
  * Interfaces (holds the interfaces for interacting with the docker)
@@ -7,7 +7,6 @@ This repository has the following structure:
  
 # Table of Contents
 
-- [Introduction to this git repo](#introduction-to-this-git-repo)
 - [PIMA: Plasmid, Integrations, Mutations, and Antibiotic docker implementation](#pima--plasmid--integrations--mutations--and-antibiotic-docker-implementation)
   * [Prerequisites](#prerequisites)
 - [Installation](#installation)
@@ -22,13 +21,13 @@ This repository has the following structure:
   * [Python Interface](#python-interface-1)
   * [Direct access](#direct-access)
 
-#Installation and preparation of pima docker
+#Installation and preparation of PIMA docker
 
 ## Prerequisites
 
-In order to install this software you must have administrator permissions. These permissions are required to install the needed GPU drivers and the Docker daemon. If the software is already installed skip to the operations section.
+In order to install this software you must have administrator permissions. These permissions are required to install the needed GPU drivers and the Docker daemon. If the software is already installed skip to the operations section.  
 
-PiMA relies on GPU acceleration and parallezation for parts of its pipeline. Therefore a graphics card with a CUDA Compute Capability of >=6.0. [Handy Reference linking GPUs to Compatibility](https://developer.nvidia.com/cuda-gpus#compute)
+PiMA relies on GPU acceleration and parallezation for parts of its pipeline. Therefore a graphics card with a CUDA Compute Capability of >=6.0. [Handy Reference linking GPUs to Compatibility](https://developer.nvidia.com/cuda-gpus#compute)  
 
 The Docker environment and associated files require at least 100gb to build correctly and execute. It is recommended that more than 200gb be available to the host machine for.
 
@@ -80,9 +79,9 @@ After running that install there should be two files created in the installation
 pima_interface.py <- This is the python interface script
 Preloaded.json <- This json file denotes reference files that are preloaded in the docker
 ```
-The python Interface manages calling the docker and handling standard arguments.
-
-**note to run this script, you may require elevated permissions depending on how docker was installed**
+The python Interface manages calling the docker and handling standard arguments.  
+  
+**Note: To run this script, you may require elevated permissions depending on how docker was installed**
 ### Quickstart
 A typical fastq run can be executed with given reference & mutation files
 ```commandline
@@ -131,8 +130,8 @@ The standard format for executing a docker image is as follows:
 ```commandline
 docker run -it --gpus all --mount type=bind,source=<DesiredDirectory>,target=/home/DockerDir/mountpoint/ appliedbioinformaticslab/pima-docker:kraken <any arguments to pima>
 ```
-** a full treatment of how to interact with docker containers via mounting is given [here](https://docs.docker.com/storage/bind-mounts/) **
-** note the --gpus all flag denotes that the container may access GPUs on the host device and is required **
+** A full treatment of how to interact with docker containers via mounting is given [here](https://docs.docker.com/storage/bind-mounts/) **  
+** Note: the --gpus all flag denotes that the container may access GPUs on the host device and is required **
 # Examples
 
 Consider an example scenario where you want to assemble Bacillus anthracis ont reads. If the reference file is named ref.fasta and the query fast5 files are in the folder named barcodes_folder, the mutation regions bed file is named mutation_regions.bed and the output folder you named is ont_output then your options are as follows:
