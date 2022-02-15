@@ -27,7 +27,7 @@ def calldocker(reference,mutation,output,fast5=None,fastq=None):
         )
         print('logging:{0}'.format(datetime.now()))
         for line in runtime.logs(stream=True):
-            print(line.strip())
+            print(str(line.strip().decode('utf-8')))
         print('Finished:{0}'.format(datetime.now()))
     except KeyboardInterrupt: #Kill detached container too
         runtime.kill()
