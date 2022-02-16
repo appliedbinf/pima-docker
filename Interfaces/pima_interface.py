@@ -4,8 +4,10 @@ import docker
 from datetime import datetime
 import json
 
-with open('Preloaded.json',) as preloaded:
-    Current_SupportedOrganisms = json.loads(preloaded.read())
+#with open('Preloaded.json',) as preloaded:
+    #Current_SupportedOrganisms = json.loads(preloaded.read())
+
+Current_SupportedOrganisms = ["bacillus_anthracis", "bacillus_anthracis_STERNE", "burkholderia_psuedomallei", "francisella_tularensis", "francisella_tularensis_LVS", "klebsiella_pneumoniae", "yersinia_pestis", "yersinia_pestis_KIM10+", "yersinia_pestis_KIM5"]
 
 def calldocker(reference,mutation,output,fast5=None,fastq=None):
     if fastq:
