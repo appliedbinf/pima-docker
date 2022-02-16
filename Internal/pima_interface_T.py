@@ -25,7 +25,9 @@ def calldocker(reference,mutation,output,fast5=None,fastq=None):
             command=command,
             image='appliedbioinformaticslab/pima-docker:kraken',
             volumes={os.getcwd(): {'bind': '/home/DockerDir/mountpoint/', 'mode': 'rw'}},
-            runtime="nvidia",
+            device_requests=[
+                docker.types.DeviceRequest(count=-1, capabilities=[['gpu']])
+            ],
             detach=True,
         )
         print('logging:{0}'.format(datetime.now()))
