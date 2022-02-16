@@ -138,12 +138,12 @@ Consider an example scenario where you want to assemble Bacillus anthracis ont r
 ## Python Interface
 You may either provide the reference files:
 ```commandline
-python pima_inteface --reference_genome ref.fasta --mutation mutation_regions.bed \
+python pima_inteface.py --reference_genome ref.fasta --mutation mutation_regions.bed \
 --Fast5 barcodes_folder/ --output ont_outpt
 ```
 Or use the included reference and mutation genome files
 ```commandline
-python pima_inteface --Preloded_Reference bacillus_anthracis --Fast5 barcodes_folder/ --output ont_outpt
+python pima_inteface.py --Preloded_Reference bacillus_anthracis --Fast5 barcodes_folder/ --output ont_outpt
 ```
 ## Direct access
 The direct access command essentially appends all the flags for [pima](https://github.com/appliedbinf/pima/blob/master/README.md#quickstart-guide) to the docker command:
