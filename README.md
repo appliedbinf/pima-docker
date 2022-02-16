@@ -20,6 +20,8 @@ This repository has the following structure:
 - [Examples](#examples)
   * [Python Interface](#python-interface-1)
   * [Direct access](#direct-access)
+- [FAQ](#faq)
+  * [Using Mounts to connect spare directories for docker](#using-mounts-to-connect-spare-directories-for-docker)
 
 #Installation and preparation of PIMA docker
 
@@ -152,3 +154,19 @@ docker run -it --gpus all --mount type=bind,source=<DesiredDirectory>,target=/ho
 --out ont_output --ont-fast5 barcodes_folder --threads 16 --overwrite --genome-size 5m \
 --verb 3 --reference-genome ref.fasta --mutation-regions mutation_regions.bed
 ```
+
+
+# FAQ
+## Using Mounts to connect spare directories for docker
+By default, the interface script mounts the current directory with the docker, therefore only files and dirs within the current directory (and lower) are accessible by Docker.
+If files or directories in other parts of the file system they can be temporarily mounted to a folder within the current directory before docker mounts it.
+
+For example, to mount /var/lib to my current directory I would first create a directory.
+```commandline
+mkdir temp_mount
+```
+Then bind /var/lib to this directory
+```commandline
+sudo mount --bind /var/lib/ temp_mount
+```
+Now when docker mounts my current directory it will also have access to /var/lib by way of temp_mount
