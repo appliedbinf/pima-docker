@@ -42,5 +42,13 @@ for i in os.listdir(path):
     if '.fasta' in i:
         Names.append(createmutdir(i))
 
-with open("Preloaded.json","w") as outfile:
-    json.dump(Names,outfile)
+with open("pima_interface_T.py","r") as pima_int:
+    data = pima_int.readlines()
+
+#print(data[10])
+#data[10] = "Current_SupportedOrganisms = {0}\n".format(Names)
+#print(data[10])
+
+with open("../Interfaces/pima_interface.py","w",encoding='utf-8') as pima_int:
+    pima_int.writelines(data)
+
