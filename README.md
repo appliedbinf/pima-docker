@@ -72,15 +72,18 @@ You should see the --help output for PiMA.
 # Using the docker
 There are two ways of interacting with the Docker:
 1. Through the included python interface
-2. Directly calling it
+2. Through the included bash interface
+3. Directly calling it
 ## Python Interface
 After running that install there should be two files created in the installation directory.
 ```
 pima_interface.py <- This is the python interface script
-Preloaded.json <- This json file denotes reference files that are preloaded in the docker
 ```
-The python Interface manages calling the docker and handling standard arguments.  
-  
+To use this interface make sure the docker sdk for python is installed
+```commandline
+pip install docker
+```
+The python Interface manages calling the docker and handling standard arguments.
 **Note: To run this script, you may require elevated permissions depending on how docker was installed**
 ### Quickstart
 A typical fastq run can be executed with given reference & mutation files
@@ -93,19 +96,21 @@ Alternatively, one may forego providing a reference genome and mutation file, an
 python pima_inteface --Preloded_Reference <Desired Organism>\
 --Fastq <relative path to fastq files directory> --output <relative path to desired output directory>
 ```
+By default the docker ran is the kraken enabled docker, to run latest add the -t latest flag.
 ### All available Arguments
 The full description of each commandline option is provided below.
 ```commandline
-usage: pima_interface.py [-h] (-f FAST5 | -q FASTQ) [-r REFERENCE_GENOME]
-                         [-m MUTATION]
-                         [-R {bacillus_anthracis,bacillus_anthracis_STERNE,burkholderia_psuedomallei,francisella_tularensis,francisella_tulare
-nsis_LVS,klebsiella_pneumoniae,yersinia_pestis,yersinia_pestis_KIM10+,yersinia_pestis_KIM5}]
-                         -o OUTPUT
+usage: pima_interface_T.py [-h] [-t TAG] (-f FAST5 | -q FASTQ)
+                           [-r REFERENCE_GENOME] [-m MUTATION]
+                           [-R {bacillus_anthracis,bacillus_anthracis_STERNE,burkholderia_psuedomallei,francisella_tularensis,francisella_tula
+rensis_LVS,klebsiella_pneumoniae,yersinia_pestis,yersinia_pestis_KIM10+,yersinia_pestis_KIM5}]
+                           [-o OUTPUT]
 
 Pima docker python interface
 
 optional arguments:
   -h, --help            show this help message and exit
+  -t TAG, --tag TAG     tag of docker container to run:[latest|kraken]
   -f FAST5, --Fast5 FAST5
                         Path to the Directory Containing Fast5 Files
   -q FASTQ, --Fastq FASTQ
@@ -121,8 +126,20 @@ stis_KIM5}
                         Select one of the preloaded Reference and Mutation
                         Options
   -o OUTPUT, --output OUTPUT
-                        Path to output file
+                        Path to output file. If none given will create a dir
+                        named 'out'
 ```
+## Bash Interface
+Though it should be installed with the installation script, it is also accessible via:
+```commandline
+wget https://raw.githubusercontent.com/appliedbinf/pima-docker/main/pima.sh
+```
+You may run it in the same way as the python interface with the same flags
+```commandline
+sudo bash pima.sh -r <relative path to reference file> -m <relative path to mutations file> -f <relative path to fast5 files directory> -o <relative path to output directory>
+```
+The flags for -r, -m, -f, -o all have to be set and should be within the current working directory by a reachable relative path.
+If an output directory is not provided then running this script will execute pima and output the results to a directory named **out** within the current working directory.
 ## Direct Access
 For finer control, one may pass parameters directly to the docker as though it were [pima](https://github.com/appliedbinf/pima/blob/master/README.md)
 

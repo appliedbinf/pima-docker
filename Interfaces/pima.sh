@@ -14,6 +14,7 @@ do
     case "${flag}" in
         f) Fast5="${CORE_PATH}${OPTARG}";;
         q) Fastq="${CORE_PATH}${OPTARG}";;
+        t) tag="${CORE_PATH}${OPTARG}";;
         r) reference="${CORE_PATH}${OPTARG}";;
         R) reference_base=${OPTARG};;
         m) mutation="${CORE_PATH}${OPTARG}";;
@@ -60,6 +61,11 @@ if [ ! -n "$reference" ] || [ ! -n "$mutation" ] || [ ! -n "$outdir" ]; then
         exit 1
 fi
 
+if [ ! -n "$tag" ]; then
+        echo 'tag not defined, defaulting to kraken. Available options: [latest:kraken]' >&2
+        tag='kraken'
+fi
+
 if [ ! -n "$Fastq" ] && [ ! -n "$Fast5" ]; then
         echo 'Neither Fastq nor Fast5 file paths defined ' >&2
         exit 1
@@ -78,7 +84,7 @@ if [ -n "$Fastq" ] && [ ! -n "$Fast5" ]; then
         echo "reference: $reference";
         echo "mutation: $mutation";
 
-        sudo docker run -it --gpus all --mount type=bind,source=$PWD,target=$CORE_PATH appliedbioinformaticslab/pima-docker:kraken --out $CORE_PATH/$outdir --ont-fastq $Fastq --threads 20 --overwrite --contamination --reference-genome=$reference --mutation-regions=$mutation --genome-size 5.4m --verb 3
+        sudo docker run -it --gpus all --mount type=bind,source=$PWD,target=$CORE_PATH appliedbioinformaticslab/pima-docker:$tag --out $CORE_PATH/$outdir --ont-fastq $Fastq --threads 20 --overwrite --contamination --reference-genome=$reference --mutation-regions=$mutation --genome-size 5.4m --verb 3
         exit 0
 fi
 
@@ -88,6 +94,6 @@ if [ ! -n "$Fastq" ] && [ -n "$Fast5" ]; then
         echo "reference: $reference";
         echo "mutation: $mutation";
 
-        sudo docker run -it --gpus all --mount type=bind,source=$PWD,target=$CORE_PATH appliedbioinformaticslab/pima-docker:kraken --out $CORE_PATH/$outdir --ont-fast5 $Fast5 --threads 20 --overwrite --contamination --reference-genome=$reference --mutation-regions=$mutation --genome-size 5.4m --verb 3
+        sudo docker run -it --gpus all --mount type=bind,source=$PWD,target=$CORE_PATH appliedbioinformaticslab/pima-docker:$tag --out $CORE_PATH/$outdir --ont-fast5 $Fast5 --threads 20 --overwrite --contamination --reference-genome=$reference --mutation-regions=$mutation --genome-size 5.4m --verb 3
         exit 0
 fi
