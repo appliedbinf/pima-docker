@@ -97,7 +97,7 @@ output = constructPath(opts['output'])
 
 # Execute Docker
 print('Executing:{0}'.format(datetime.now()))
-calldocker(reference,mutation,output,opts['Fast5'],opts['Fastq'])
+calldocker(reference,mutation,output,opts['tag'],opts['Fast5'],opts['Fastq'])
 
 #bash -m samples_dod/reference/Ames/mutation_regions.bed -q samples_dod/combined.fastq -r samples_dod/reference/ref_genome.fasta -o test
 #bash pima.sh -m samples_dod/reference/Ames/mutation_regions.bed -q samples_dod/combined.fastq -R klebsiella_pneumoniae -o test
