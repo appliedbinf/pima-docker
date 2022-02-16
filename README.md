@@ -23,8 +23,6 @@ This repository has the following structure:
 - [FAQ](#faq)
   * [Using Mounts to connect spare directories for docker](#using-mounts-to-connect-spare-directories-for-docker)
 
-#Installation and preparation of PIMA docker
-
 ## Prerequisites
 
 In order to install this software you must have administrator permissions. These permissions are required to install the needed GPU drivers and the Docker daemon. If the software is already installed skip to the operations section.  
