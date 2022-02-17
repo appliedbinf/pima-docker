@@ -33,9 +33,10 @@ def calldocker(reference,mutation,output,tag,fast5=None,fastq=None):
             command=command,
             image='appliedbioinformaticslab/pima-docker:{}'.format(tag),
             volumes={os.getcwd(): {'bind': '/home/DockerDir/mountpoint/', 'mode': 'rw'}},
-            device_requests=[
-                docker.types.DeviceRequest(count=-1, capabilities=[['gpu']])
-            ],
+            runtime='nvidia',
+            #device_requests=[
+            #    docker.types.DeviceRequest(count=-1, capabilities=[['gpu']])
+            #],
             detach=True,
         )
         print('logging:{0}'.format(datetime.now()))
