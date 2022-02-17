@@ -81,12 +81,13 @@ pima_interface.py <- This is the python interface script
 ```
 To use this interface make sure the docker sdk for python is installed
 ```commandline
-pip install docker
+pip install python_on_whales
 ```
 The python Interface manages calling the docker and handling standard arguments.
 **Note: To run this script, you may require elevated permissions depending on how docker was installed**
 ### Quickstart
 A typical fastq run can be executed with given reference & mutation files
+By default the docker ran is the **kraken** enabled docker, to run latest add the **-t latest** flag.
 ```commandline
 python pima_inteface --reference_genome <relative path to reference file> --mutation <relative path to mutations file> \
 --Fastq <relative path to fastq files directory> --output <relative path to desired output directory>
@@ -96,7 +97,7 @@ Alternatively, one may forego providing a reference genome and mutation file, an
 python pima_inteface --Preloded_Reference <Desired Organism>\
 --Fastq <relative path to fastq files directory> --output <relative path to desired output directory>
 ```
-By default the docker ran is the kraken enabled docker, to run latest add the -t latest flag.
+
 ### All available Arguments
 The full description of each commandline option is provided below.
 ```commandline
@@ -170,8 +171,13 @@ docker run -it --gpus all --mount type=bind,source=<DesiredDirectory>,target=/ho
 --verb 3 --reference-genome ref.fasta --mutation-regions mutation_regions.bed
 ```
 
-
 # FAQ
+
+## Facing Nvidia or Daemon Issues
+There are a myriad of reasons these can occur, but typically result from either the changes to the daemon or the drivers not taking effect.
+
+Easiest solution is to restart the computer
+
 ## Using Mounts to connect spare directories for docker
 By default, the interface script mounts the current directory with the docker, therefore only files and dirs within the current directory (and lower) are accessible by Docker.
 If files or directories in other parts of the file system they can be temporarily mounted to a folder within the current directory before docker mounts it.

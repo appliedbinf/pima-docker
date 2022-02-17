@@ -33,8 +33,8 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 # Install the Nvidia Toolkit and Nvidia Drivers
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 
-curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
-curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+wget -qO- https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+wget -qO- https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
 sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 
 # Create docker user group and add current user to it

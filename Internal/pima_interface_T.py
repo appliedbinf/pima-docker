@@ -1,6 +1,6 @@
 import argparse
 import os
-import docker
+from python_on_whales import docker
 from datetime import datetime
 import json
 
@@ -15,7 +15,7 @@ def calldocker(reference,mutation,output,tag,fast5=None,fastq=None):
         fastq = constructPath(fastq)
         if tag == 'kraken':
             command = '--out {2} --ont-fastq {3} --threads 20 --overwrite --contamination --reference-genome={0} --mutation-regions={1} --genome-size 5.4m --verb 3'.format(
-                reference, mutation, output, fastq)
+                reference,mutation,output,fastq)
         else:
             command = '--out {2} --ont-fastq {3} --threads 20 --overwrite --reference-genome={0} --mutation-regions={1} --genome-size 5.4m --verb 3'.format(
                 reference, mutation, output, fastq)
@@ -27,24 +27,19 @@ def calldocker(reference,mutation,output,tag,fast5=None,fastq=None):
         else:
             command = '--out {2} --ont-fast5 {3} --threads 20 --overwrite --reference-genome={0} --mutation-regions={1} --genome-size 5.4m --verb 3'.format(
                 reference, mutation, output, fast5)
-    client = docker.from_env()
-    try:
-        runtime = client.containers.run(
-            command=command,
-            image='appliedbioinformaticslab/pima-docker:{}'.format(tag),
-            volumes={os.getcwd(): {'bind': '/home/DockerDir/mountpoint/', 'mode': 'rw'}},
-            device_requests=[
-                docker.types.DeviceRequest(count=-1, capabilities=[['gpu']])
-            ],
-            detach=True,
-        )
-        print('logging:{0}'.format(datetime.now()))
-        for line in runtime.logs(stream=True):
-            print(str(line.strip().decode('utf-8')))
-        print('Finished:{0}'.format(datetime.now()))
-    except KeyboardInterrupt: #Kill detached container too
-        runtime.kill()
-        raise
+    command = command.split(' ')
+    #print(command)
+    output_generator = docker.run(
+        command=command,
+        image='appliedbioinformaticslab/pima-docker:{}'.format(tag),
+        volumes=[(os.getcwd(),"/home/DockerDir/mountpoint/")],
+        gpus="all",
+        tty=True,
+        interactive=True,
+    )
+    print('Logging:{0}'.format(datetime.now()))
+    #for stream_type, stream_content in output_generator:
+    #    print("Stream type: {0}, stream content: {1}".format(stream_type,str(stream_content.strip().decode('utf-8'))))
 
 def constructPathO(Organism):
     reference = '/home/DockerDir/References/{0}/{0}.fasta'.format(Organism)
