@@ -101,9 +101,9 @@ if [ ! -n "$Fastq" ] && [ -n "$Fast5" ]; then
         echo "mutation: $mutation";
 
         if [ "$tag" == "kraken" ]; then
-          sudo docker run -it --gpus all --mount type=bind,source=$PWD,target=$CORE_PATH appliedbioinformaticslab/pima-docker:$tag --out $CORE_PATH/$outdir --ont-fast5 $Fastq --threads 20 --overwrite --contamination --reference-genome=$reference --mutation-regions=$mutation --genome-size 5.4m --verb 3
+          sudo docker run -it --gpus all --mount type=bind,source=$PWD,target=$CORE_PATH appliedbioinformaticslab/pima-docker:$tag --out $CORE_PATH/$outdir --ont-fast5 $Fast5 --threads 20 --overwrite --contamination --reference-genome=$reference --mutation-regions=$mutation --genome-size 5.4m --verb 3
         else
-          sudo docker run -it --gpus all --mount type=bind,source=$PWD,target=$CORE_PATH appliedbioinformaticslab/pima-docker:$tag --out $CORE_PATH/$outdir --ont-fast5 $Fastq --threads 20 --overwrite --reference-genome=$reference --mutation-regions=$mutation --genome-size 5.4m --verb 3
+          sudo docker run -it --gpus all --mount type=bind,source=$PWD,target=$CORE_PATH appliedbioinformaticslab/pima-docker:$tag --out $CORE_PATH/$outdir --ont-fast5 $Fast5 --threads 20 --overwrite --reference-genome=$reference --mutation-regions=$mutation --genome-size 5.4m --verb 3
         fi
         exit 0
 fi
