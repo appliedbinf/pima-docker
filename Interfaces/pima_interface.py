@@ -13,12 +13,20 @@ Current_SupportedOrganisms = ["bacillus_anthracis", "bacillus_anthracis_STERNE",
 def calldocker(reference,mutation,output,tag,fast5=None,fastq=None):
     if fastq:
         fastq = constructPath(fastq)
-        command = '--out {2} --ont-fastq {3} --threads 20 --overwrite --contamination --reference-genome={0} --mutation-regions={1} --genome-size 5.4m --verb 3'.format(
-            reference,mutation,output,fastq)
+        if tag == 'kraken':
+            command = '--out {2} --ont-fastq {3} --threads 20 --overwrite --contamination --reference-genome={0} --mutation-regions={1} --genome-size 5.4m --verb 3'.format(
+                reference,mutation,output,fastq)
+        else:
+            command = '--out {2} --ont-fastq {3} --threads 20 --overwrite --reference-genome={0} --mutation-regions={1} --genome-size 5.4m --verb 3'.format(
+                reference, mutation, output, fastq)
     if fast5:
         fast5 = constructPath(fast5)
-        command = '--out {2} --ont-fast5 {3} --threads 20 --overwrite --contamination --reference-genome={0} --mutation-regions={1} --genome-size 5.4m --verb 3'.format(
-            reference, mutation, output, fast5)
+        if tag == 'kraken':
+            command = '--out {2} --ont-fast5 {3} --threads 20 --overwrite --contamination --reference-genome={0} --mutation-regions={1} --genome-size 5.4m --verb 3'.format(
+                reference, mutation, output, fast5)
+        else:
+            command = '--out {2} --ont-fast5 {3} --threads 20 --overwrite --reference-genome={0} --mutation-regions={1} --genome-size 5.4m --verb 3'.format(
+                reference, mutation, output, fast5)
     client = docker.from_env()
     try:
         runtime = client.containers.run(
