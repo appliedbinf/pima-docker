@@ -2,7 +2,7 @@
 
 CORE_PATH="/home/DockerDir/mountpoint/";
 
-while getopts "R:m:r:f:q:o:" flag
+while getopts "R:m:r:f:q:o:t:" flag
 
 #Add a Help flag for usage
 #Create a script for loading paths
@@ -14,7 +14,7 @@ do
     case "${flag}" in
         f) Fast5="${CORE_PATH}${OPTARG}";;
         q) Fastq="${CORE_PATH}${OPTARG}";;
-        t) tag="${CORE_PATH}${OPTARG}";;
+        t) tag="${OPTARG}";;
         r) reference="${CORE_PATH}${OPTARG}";;
         R) reference_base=${OPTARG};;
         m) mutation="${CORE_PATH}${OPTARG}";;
