@@ -21,7 +21,7 @@ sudo apt-get install -y \
     gnupg-agent \
     software-properties-commo
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+wget -qO- https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 wget https://raw.githubusercontent.com/appliedbinf/pima-docker/main/Interfaces/pima.sh
 wget https://raw.githubusercontent.com/appliedbinf/pima-docker/main/Interfaces/pima_interface.py
