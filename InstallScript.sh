@@ -19,7 +19,7 @@ sudo apt-get install -y \
     ca-certificates \
     curl \
     gnupg-agent \
-    software-properties-commo
+    software-properties-common
 
 wget -qO- https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
