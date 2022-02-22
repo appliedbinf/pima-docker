@@ -75,13 +75,13 @@ There are two ways of interacting with the Docker:
 2. Through the included bash interface
 3. Directly calling it
 ## Python Interface
-After running that install there should be two files created in the installation directory.
-```
-pima_interface.py <- This is the python interface script
-```
 To use this interface make sure the docker sdk for python is installed
 ```commandline
 pip install python_on_whales
+```
+After running that install there should be a python file created in the installation directory.
+```
+pima_interface.py <- This is the python interface script
 ```
 The python Interface manages calling the docker and handling standard arguments.
 **Note: To run this script, you may require elevated permissions depending on how docker was installed**
