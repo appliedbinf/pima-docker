@@ -176,7 +176,7 @@ docker run -it --gpus all --mount type=bind,source=<DesiredDirectory>,target=/ho
 ## Facing Nvidia or Daemon Issues
 There are a myriad of reasons these can occur, but typically result from either the changes to the daemon or the drivers not taking effect.
 
-Easiest solution is to restart the computer
+It is recommended that one reinstalls compatible Nvidia Drivers and then restarts the machine so the changes can take effect.
 
 ## Using Mounts to connect spare directories for docker
 By default, the interface script mounts the current directory with the docker, therefore only files and dirs within the current directory (and lower) are accessible by Docker.
