@@ -1,8 +1,10 @@
 import argparse
 import os
 from python_on_whales import docker
+from argparse import HelpFormatter
 from datetime import datetime
 import json
+import sys
 
 #with open('Preloaded.json',) as preloaded:
     #Current_SupportedOrganisms = json.loads(preloaded.read())
@@ -38,6 +40,7 @@ def calldocker(reference,mutation,output,unknown,tag,fast5=None,fastq=None):
         image='appliedbioinformaticslab/pima-docker:{}'.format(tag),
         volumes=[(os.getcwd(),"/home/DockerDir/mountpoint/")],
         gpus="all",
+        remove=True,
         tty=True,
         interactive=True,
     )
@@ -55,13 +58,11 @@ def constructPath(name):
 
 # Setup Parser
 parser = argparse.ArgumentParser(description='Pima docker python interface',
+                                 formatter_class=lambda prog: HelpFormatter(prog, width=120, max_help_position=120),
                                  conflict_handler="resolve")
 
 parser.add_argument("-t","--tag",type=str,action="store",default="kraken",
                     help="tag of docker container to run:[latest|kraken]")
-
-parser.add_argument("-h","--help",action='store_true',
-                    help="Retrieve the help commands from the pima script")
 
 # Add mutually exclusive Fasta Group
 fastgroup = parser.add_mutually_exclusive_group(required=True)
@@ -69,6 +70,8 @@ fastgroup.add_argument("-f","--Fast5",type=str,action="store",
                     help="Path to the Directory Containing Fast5 Files")
 fastgroup.add_argument("-q","--Fastq",type=str,action="store",
                     help="Path to the Directory Containing Fastq Files")
+fastgroup.add_argument("-h","--help",action='store_true',
+                    help="Retrieve the help commands from the pima script")
 
 # Add mutation and reference parser
 parser.add_argument("-r","--reference_genome",type=str,action="store",
@@ -88,14 +91,18 @@ opts, unknown = parser.parse_known_args()
 opts = vars(opts)
 
 if opts["help"]:
-    docker.run(
+    print('Short commands for PIMA Interface')
+    parser.print_help()
+    print('Short commands for pima script')
+    output_generator = docker.run(
         command=["--help"],
         image='appliedbioinformaticslab/pima-docker'.format(),
         volumes=[(os.getcwd(), "/home/DockerDir/mountpoint/")],
         gpus="all",
-        tty=True,
-        interactive=True,
+        remove=True,
     )
+    print(output_generator)
+    sys.exit(1)
 else:
     # Control Logic
     if not opts['Preloded_Reference'] and not opts['mutation']:
