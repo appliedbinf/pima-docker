@@ -32,7 +32,18 @@ PiMA relies on GPU acceleration and parallezation for parts of its pipeline. The
 The Docker environment and associated files require at least 100gb to build correctly and execute. It is recommended that more than 200gb be available to the host machine for.
 
 # Installation
+## Installation of Drivers
+Install the latest Nvidia Drivers supported by your system. At minimum, the version of the drivers must be 450.
+```
+sudo apt search nvidia-driver
+```
+Look for the drivers that are supported by your GPU and select one with a version later than 450.
+```
+sudo apt install [driver_name]
+```
+This may take a while, its recommended you restart your system after the drivers are installed.
 
+## Installation of Pima Docker
 Download the installation scripts to your system
 
 ```commandline
