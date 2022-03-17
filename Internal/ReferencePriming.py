@@ -2,6 +2,7 @@ import os
 import shutil
 import pandas as pd
 import json
+import re
 
 # This is a utility set up function that converts a folder of fasta files into a folder of Ames files
 # Gene Symbol <- Name
@@ -16,12 +17,18 @@ path = 'References'
 Columns = ['Contig id','Start','Stop','Gene symbol','Class','Subclass','Sequence name']
 
 # FIRST COLUMN is just chromosome
+# TODO Clean up
+
 
 def reducefile(i):
+    #with open(j,'r') as fasta:
+    #    match = re.search('>(\S+)',fasta.readline())
+    #    AccessionID = match.group(0)
+    #print(AccessionID)
     File = pd.read_csv(i,delimiter='\t')
     output = File[Columns]
-    output.set_axis(['contig','start','stop','name','type','drug','note'],axis=1,inplace=True)
-    output['contig'] = 'chromosome'
+    output.set_axis(['#contig','start','stop','name','type','drug','note'],axis=1,inplace=True)
+    #output['#contig'] = AccessionID #Grab the Accession ID from the fasta w/ version
     output.to_csv(i.split('.')[0]+'_r.bed',sep='\t',index=False)
 
 def createmutdir(i):
