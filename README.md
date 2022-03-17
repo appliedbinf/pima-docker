@@ -10,17 +10,21 @@ This repository has the following structure:
 - [PIMA: Plasmid, Integrations, Mutations, and Antibiotic docker implementation](#pima--plasmid--integrations--mutations--and-antibiotic-docker-implementation)
   * [Prerequisites](#prerequisites)
 - [Installation](#installation)
+  * [Installation of Drivers](#installation-of-drivers)
+  * [Installation of Pima Docker](#installation-of-pima-docker)
   * [Add Docker Group](#add-docker-group)
 - [Testing installation](#testing-installation)
 - [Using the docker](#using-the-docker)
   * [Python Interface](#python-interface)
     + [Quickstart](#quickstart)
     + [All available Arguments](#all-available-arguments)
+  * [Bash Interface](#bash-interface)
   * [Direct Access](#direct-access)
 - [Examples](#examples)
   * [Python Interface](#python-interface-1)
   * [Direct access](#direct-access)
 - [FAQ](#faq)
+  * [Facing Nvidia or Daemon Issues](#facing-nvidia-or-daemon-issues)
   * [Using Mounts to connect spare directories for docker](#using-mounts-to-connect-spare-directories-for-docker)
 
 ## Prerequisites
@@ -32,7 +36,18 @@ PiMA relies on GPU acceleration and parallezation for parts of its pipeline. The
 The Docker environment and associated files require at least 100gb to build correctly and execute. It is recommended that more than 200gb be available to the host machine for.
 
 # Installation
+## Installation of Drivers
+Install the latest Nvidia Drivers supported by your system. At minimum, the version of the drivers must be 450.
+```
+sudo apt search nvidia-driver
+```
+Look for the drivers that are supported by your GPU and select one with a version later than 450.
+```
+sudo apt install [driver_name]
+```
+This may take a while, its recommended you restart your system after the drivers are installed.
 
+## Installation of Pima Docker
 Download the installation scripts to your system
 
 ```commandline
