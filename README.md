@@ -29,6 +29,9 @@ This repository has the following structure:
 
 ## Prerequisites
 
+**Python Version >3.7
+Ubuntu Version >18.04**
+
 In order to install this software you must have administrator permissions. These permissions are required to install the needed GPU drivers and the Docker daemon. If the software is already installed skip to the operations section.  
 
 PiMA relies on GPU acceleration and parallezation for parts of its pipeline. Therefore a graphics card with a CUDA Compute Capability of >=6.0. [Handy Reference linking GPUs to Compatibility](https://developer.nvidia.com/cuda-gpus#compute)  
